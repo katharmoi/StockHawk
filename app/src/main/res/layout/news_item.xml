@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/news_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="@dimen/news_card_corner">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:baselineAligned="false">
+
+        <TextView
+            android:id="@+id/news_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Some Text" />
+
+        <TextView
+            android:id="@+id/news_desc_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            tools:text="Lorem Ipsum dolor sit amet" />
+        <TextView
+            android:id="@+id/news_date_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="2dp"
+            tools:text="12.06.2005"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

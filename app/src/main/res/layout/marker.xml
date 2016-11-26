@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="3dp"
+    app:cardBackgroundColor="@color/marker"
+    android:elevation="3dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <GridLayout
+        android:id="@+id/marker_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:rowCount="4"
+        android:layout_margin="5dp"
+        >
+
+        <TextView android:id="@+id/marker_date_view"
+            android:textColor="@color/material_blue_500"
+            android:layout_columnSpan="2"
+            android:layout_gravity="center"
+            android:text="24-02-2016"
+            tools:text="Jun 24 2016"/>
+        <TextView
+            android:text="@string/marker_low"
+            android:layout_gravity="start"/>
+        <TextView
+            android:id="@+id/marker_low_view"
+            android:layout_gravity="end"
+            android:text="000.0"
+            tools:text="122"/>
+        <TextView
+            android:text="@string/marker_high"
+            android:layout_gravity="start"/>
+        <TextView
+            android:id="@+id/marker_high_view"
+            android:layout_gravity="end"
+            android:text="000.0"
+            tools:text="122"/>
+
+        <TextView
+            android:text="@string/marker_close"
+            android:layout_gravity="start"/>
+        <TextView
+            android:id="@+id/marker_close_view"
+            android:layout_gravity="end"
+            android:text="000.0"
+            tools:text="122"/>
+
+    </GridLayout>
+</android.support.v7.widget.CardView>
