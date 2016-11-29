@@ -38,6 +38,7 @@ import com.google.android.gms.iid.MessengerCompat;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
+import com.sam_chordas.android.stockhawk.rest.Constants;
 import com.sam_chordas.android.stockhawk.rest.QuoteCursorAdapter;
 import com.sam_chordas.android.stockhawk.rest.RecyclerViewItemClickListener;
 import com.sam_chordas.android.stockhawk.rest.Utils;
@@ -59,7 +60,6 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
-    public static final String DATA_FETCHED = "fetched";
     public static final String SERVICE_FAILURE = "failure";
     public static final String SERVICE_SUCCESS = "isSuccessful";
     private CharSequence mTitle;
@@ -85,25 +85,28 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         mProgress.setMessage(getString(R.string.progress_message));
         mProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgress.setIndeterminate(true);
-        final View root = findViewById(android.R.id.content);
+        final View root = findViewById(R.id.main_layout);
 
         // The intent service is for executing immediate pulls from the Yahoo API
         // GCMTaskService can only schedule tasks, they cannot execute immediately
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mServiceIntent = new Intent(this, StockIntentService.class);
         if (savedInstanceState == null) {
             // Run the initialize task service so that some stocks appear upon an empty database
-            Log.d("BURAYA GIRDI","BURAYA GIRDI");
             mServiceIntent.putExtra("tag", "init");
             if (isConnected()) {
                 startService(mServiceIntent);
                 mProgress.show();
             } else {
+                recyclerView.setVisibility(View.GONE);
+                mEmptyView.setText(getString(R.string.error_data_fetch));
+                mEmptyView.setVisibility(View.VISIBLE);
                 networkToast();
             }
         }
         Toolbar mToolBar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(mToolBar);
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
         swipe = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
@@ -135,8 +138,10 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         mReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(DATA_FETCHED)) {
+                if (intent.getAction().equals(Constants.ACTION_DATA_FETCHED)) {
                     if (intent.getBooleanExtra(SERVICE_SUCCESS, false)) {
+                        recyclerView.setVisibility(View.VISIBLE);
+                        mEmptyView.setVisibility(View.GONE);
                         getLoaderManager().restartLoader(CURSOR_LOADER_ID, null, MyStocksActivity.this);
                         Snackbar.make(root,getString(R.string.update_succesful),Snackbar.LENGTH_SHORT).show();
 
@@ -249,7 +254,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     public void onResume() {
         super.onResume();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(DATA_FETCHED);
+        intentFilter.addAction(Constants.ACTION_DATA_FETCHED);
         intentFilter.addAction(SERVICE_FAILURE);
         registerReceiver(mReceiver, intentFilter);
 //        getLoaderManager().restartLoader(CURSOR_LOADER_ID, null, this);
@@ -264,7 +269,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
 
     public void networkToast() {
         String message = getString(R.string.network_toast);
-        if (mCursorAdapter.getItemCount() != 0) {
+        if (mCursorAdapter != null && mCursorAdapter.getItemCount() != 0) {
             message += getString(R.string.invalid_data);
         }
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
@@ -292,10 +297,6 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         if (id == R.id.action_change_units) {
             // this is for changing stock changes from percent value to dollar value
@@ -312,6 +313,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                 swipe.setRefreshing(false);
             } else {
                 networkToast();
+                swipe.setRefreshing(false);
             }
             return true;
 

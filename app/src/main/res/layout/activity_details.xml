@@ -5,22 +5,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
-    android:fitsSystemWindows="true">
+    android:background="@android:color/background_light">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/details_appbar"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/main.collapsing"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
+            app:contentScrim="@color/colorPrimary"
             app:expandedTitleMarginEnd="24dp"
             app:expandedTitleMarginStart="28dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -30,16 +28,10 @@
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chart"
                 android:layout_width="match_parent"
+                android:layout_marginTop="40dp"
                 android:layout_height="240dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="10dp" />
-            <ProgressBar
-                android:id="@+id/chartProgressBar"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone"/>
+                />
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/details_ac_toolbar"
                 android:layout_width="match_parent"
@@ -57,6 +49,13 @@
        android:layout_height="wrap_content"
        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-
+    <ProgressBar
+        android:id="@+id/chartProgressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_anchor="@id/main.collapsing"
+        app:layout_anchorGravity="center"/>
 
 </android.support.design.widget.CoordinatorLayout>

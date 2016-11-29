@@ -14,6 +14,7 @@ import com.google.android.gms.gcm.GcmTaskService;
 import com.google.android.gms.gcm.TaskParams;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
+import com.sam_chordas.android.stockhawk.rest.Constants;
 import com.sam_chordas.android.stockhawk.rest.Utils;
 import com.sam_chordas.android.stockhawk.ui.MyStocksActivity;
 import com.squareup.okhttp.OkHttpClient;
@@ -145,7 +146,7 @@ public class StockTaskService extends GcmTaskService {
 
     private void sendResultBroadcast(boolean isSuccessfull) {
         Intent intent = new Intent();
-        intent.setAction(MyStocksActivity.DATA_FETCHED);
+        intent.setAction(Constants.ACTION_DATA_FETCHED);
         intent.putExtra(MyStocksActivity.SERVICE_SUCCESS, isSuccessfull);
         mContext.sendBroadcast(intent);
     }

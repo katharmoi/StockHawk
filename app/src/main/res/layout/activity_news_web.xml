@@ -7,6 +7,13 @@
     tools:context="com.sam_chordas.android.stockhawk.ui.NewsWebActivity">
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar_web"/>
+    <ProgressBar
+        android:id="@+id/web_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
     <WebView
         android:id="@+id/news_web_view"
         android:layout_width="match_parent"

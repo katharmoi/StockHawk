@@ -49,10 +49,41 @@
                     android:id="@+id/txvWidgetTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Widget with Collections Test"
+                    android:text="@string/widget_subText"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#4B4B4D" />
             </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#616161">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/widget_stocks_header"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:maxLines="1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/widget_price_header"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:maxLines="1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/widget_change_header"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:maxLines="1"/>
+
         </LinearLayout>
 
         <TextView

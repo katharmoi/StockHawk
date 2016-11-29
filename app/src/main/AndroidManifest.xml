@@ -45,9 +45,10 @@
 
         <activity android:name=".ui.DetailsActivity" />
 
-        <receiver android:name=".widget.AppWidgetProvider">
+        <receiver android:name=".widget.StocksWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.sam_chordas.android.stockhawk.DATA_FETCHED" />
             </intent-filter>
 
             <meta-data
@@ -56,7 +57,7 @@
         </receiver>
 
         <service
-            android:name=".widget.MyRemoteViewsWidgetService"
+            android:name=".widget.StocksRemoteViewsWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <activity android:name=".ui.NewsWebActivity" />

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/widget_item">
+    <TextView
+        android:id="@+id/widget_stock_symbol_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textColor="@color/icons"
+        style="@android:style/TextAppearance.Large"
+        android:maxLines="1"
+        tools:text="AABB"/>
+    <TextView
+        android:id="@+id/widget_stock_symbol_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textColor="@color/icons"
+        android:maxLines="1"
+        style="@android:style/TextAppearance.Large"
+        tools:text="100.12"/>
+
+    <TextView
+        android:id="@+id/widget_stock_symbol_change"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textColor="@color/icons"
+        android:maxLines="1"
+        style="@android:style/TextAppearance.Large"
+        tools:text="10.12"/>
+
+
+</LinearLayout>

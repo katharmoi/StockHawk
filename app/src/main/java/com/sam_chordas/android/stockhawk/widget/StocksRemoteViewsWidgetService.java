@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
 import com.sam_chordas.android.stockhawk.ui.DetailsActivity;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by uyan on 07/11/16.
  */
-public class MyRemoteViewsWidgetService extends RemoteViewsService {
+public class StocksRemoteViewsWidgetService extends RemoteViewsService {
 
 
     @Override
@@ -84,21 +85,31 @@ public class MyRemoteViewsWidgetService extends RemoteViewsService {
         public RemoteViews getViewAt(int i) {
             if(mCursor.moveToPosition(i)){
 
-                StringBuilder sb  =new StringBuilder();
-                sb.append(mCursor.getString(mCursor.getColumnIndex(QuoteColumns.SYMBOL)) + " ");
-                sb.append(mCursor.getString(mCursor.getColumnIndex(QuoteColumns.BIDPRICE)));
+
+                String symbol = mCursor.getString(mCursor.getColumnIndex(QuoteColumns.SYMBOL)).toUpperCase() ;
+                String price =mCursor.getString(mCursor.getColumnIndex(QuoteColumns.BIDPRICE));
+                String change = mCursor.getString(mCursor.getColumnIndex(QuoteColumns.CHANGE));
+                int isUp = mCursor.getInt(mCursor.getColumnIndex(QuoteColumns.ISUP));
 
 
                 RemoteViews rv = new RemoteViews(mContext.getPackageName(),
-                        android.R.layout.simple_list_item_1);
-                rv.setTextViewText(android.R.id.text1,sb.toString());
+                       R.layout.widget_item);
+                rv.setTextViewText(R.id.widget_stock_symbol_text,symbol);
+                rv.setTextViewText(R.id.widget_stock_symbol_price,price);
+                rv.setTextViewText(R.id.widget_stock_symbol_change,change);
+                if(isUp == 1){
+                    rv.setTextColor(R.id.widget_stock_symbol_change,Color.GREEN);
+                }
+                else {
+                    rv.setTextColor(R.id.widget_stock_symbol_change,Color.RED);
+                }
 
                 Intent fillInintent = new Intent();
                 Bundle bundle = new Bundle();
                 bundle.putString("symbol",
                         mCursor.getString(mCursor.getColumnIndex(QuoteColumns.SYMBOL)));
                 fillInintent.putExtras(bundle);
-                rv.setOnClickFillInIntent(android.R.id.text1,fillInintent);
+                rv.setOnClickFillInIntent(R.id.widget_item,fillInintent);
                 return rv;
             }
             else {

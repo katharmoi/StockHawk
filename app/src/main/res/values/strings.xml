@@ -26,10 +26,14 @@
     <string name="a11y_period_one_year">get one year stocks data</string>
     <string name="a11y_back">go to stocks main</string>
     <string name="a11y_alphanumeric">Symbol can only contain letters and numbers</string>
-    <string name="invalid_data">Data is not up to date</string>
+    <string name="invalid_data">.Data may not up to date</string>
     <string name="progress_title">Getting data...</string>
     <string name="progress_message">Please wait while getting stocks data</string>
     <string name="error_data_fetch">An error occured during getting data</string>
     <string name="error_data_update">An error occured while getting data. Data may not be up to date</string>
     <string name="update_succesful">Data updated successfully</string>
+    <string name="widget_subText">Stocks Current Data</string>
+    <string name="widget_stocks_header">STOCK</string>
+    <string name="widget_price_header">PRICE</string>
+    <string name="widget_change_header">CHNG</string>
 </resources>
