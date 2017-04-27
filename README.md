@@ -1,6 +1,9 @@
 # StockHawk
 Android App For Real Time Stocks Data
 
+# Used APIs
+Content Provider, Loader, Volley, Intent Service, OKHttp,Widgets
+
 # Features
 - Get Stock History for different time periods
 - Watch history on a graph
